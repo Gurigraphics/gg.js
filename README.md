@@ -7,10 +7,31 @@
 gg.js is a single-function javascript templating engine.
 
 
+### Version minified
 ```js
 const gg = function(a){var d="area base br col embed hr img input keygen link meta param source track wbr".split(" ");if(a){a.style?a.style=a.style.split("\n").join(" "):se=0;a.tag?se=0:a.tag="div";var b="<"+a.tag,c;for(c in a)"tag"!=c&&"html"!=c?b+=" "+c+"='"+a[c]+"'":se=0;d.includes(a.tag)?a=b+"/>":(b=a.html?b+(">"+a.html):b+">",a=b+("</"+a.tag+">"));return a}};
-````
-  
+```
+
+### Version no minified
+```js
+const gg = function(obj){
+  const emptyElements = ['area','base','br','col','embed','hr','img','input','keygen','link','meta','param','source','track','wbr']   
+  const mount = (obj) => {  
+    obj.style ? obj.style = obj.style.split('\n').join(' ') : 0 
+    !obj.tag ? obj.tag = 'div' : 0    
+    let el = '<'+obj.tag 
+    for(let index in obj ) index != 'tag' && index != 'html' ? el+= (" "+index+"='"+obj[ index ]+"'") : 0
+    if(emptyElements.includes( obj.tag )) return el+'/>' 
+    else if(obj.html) el+= '>' + obj.html
+    else el+='>'  
+    return el+='</'+obj.tag+'>'
+  }
+  if(obj) return mount(obj)
+}
+```
+The emptyElements = <input/>, <img/>, etc.
+The elements = <div></div>, <span></span>, etc.
+
 ### Motivation
 
 React, Vue, Angular, etc., are overengineering in 99% of the projects that you develop alone.
