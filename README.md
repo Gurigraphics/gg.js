@@ -28,9 +28,10 @@ const gg = function(obj){
   }
   if(obj) return mount(obj)
 }
+//The elements = <div></div>, <span></span>, etc.
+//The emptyElements = <input/>, <img/>, etc.
 ```
-The emptyElements = <input/>, <img/>, etc.
-The elements = <div></div>, <span></span>, etc.
+
 
 ### Motivation
 
