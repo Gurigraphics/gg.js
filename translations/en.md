@@ -1,7 +1,7 @@
 # GG.js
 Interfaces much more complex | Development much more simple
 
-![GitHub Logo](https://imgur.com/w1t6BeL.png)
+![GitHub Logo](https://imgur.com/izjGIx2.png)
 
 # Introduction
   
@@ -39,6 +39,58 @@ const gg = function(obj){
 //The emptyElements = <input/>, <img/>, etc.
 ```
 
+
+# Usage
+
+### Comparison with React
+#### React
+```js
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+function App() {
+  return (
+    <div>
+      <Welcome name="Sara" />
+      <Welcome name="Cahal" />
+      <Welcome name="Edite" />
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById('#root'));
+```
+#### GG
+```js
+var DIV = {}
+
+DIV.welcome = props => {   
+  return gg({
+    tag:"h1",
+    html: `Hello, ${props.name}`
+  })
+}     
+
+DIV.app = () => {
+  return gg({
+    html: DIV.welcome({name:"Sara"}) +
+          DIV.welcome({name:"Cahal"}) +
+          DIV.welcome({name:"Edite"})
+  })
+}
+
+document.getElementById('#root').innerHTML = DIV.app()
+```
+GG.js is pure Javascript.
+
+Without babel. Without webpack. Without NPM. Without vulnerabilities.
+
+Without unused code.
+
+Without having to consult documentation to know how to use it.
+
+# Context
 
 ### Contextualization
 
