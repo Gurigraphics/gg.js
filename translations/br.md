@@ -40,6 +40,51 @@ const gg = function(obj){
 ```
 
 
+### Comparação com React
+#### React
+```js
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+function App() {
+  return (
+    <div>
+      <Welcome name="Sara" />
+      <Welcome name="Cahal" />
+      <Welcome name="Edite" />
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById('#root'));
+```
+#### GG
+```js
+var DIV = {}
+
+DIV.welcome = props => {   
+  return gg({
+    tag:"h1",
+    html: `Hello, ${props.name}`
+  })
+}     
+
+DIV.app = () => {
+  return gg({
+    html: DIV.welcome({name:"Sara"}) +
+          DIV.welcome({name:"Cahal"}) +
+          DIV.welcome({name:"Edite"})
+  })
+}
+
+document.getElementById('#root').innerHTML = DIV.app()
+```
+GG.js é puro Javascript. 
+Sem babel. Sem webpack. Sem NPM. Sem vulnerabilidades. Sem código não utilizado.
+Sem ter que consultar documentação para saber como utilizar.
+
+
 ### Contextualização
 
 As aplicações web se tornam cada dia mais complexas.
