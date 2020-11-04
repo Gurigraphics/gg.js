@@ -1,7 +1,7 @@
 # GG.js
 Interfaces much more complex | Development much more simple
 
-![GitHub Logo](https://imgur.com/w1t6BeL.png)
+![GitHub Logo](https://imgur.com/izjGIx2.png)
 
 
 ## Traductions
