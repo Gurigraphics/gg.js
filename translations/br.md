@@ -41,7 +41,23 @@ const gg = function(obj){
 
 # Utilização
 
-### Comparação com React
+### GG object tag
+```js
+var div = gg({
+ tag: "tagName",
+ src: "image.png",
+ data: "123",
+ class: "classe",
+ onclick: "func(event)""
+})
+```
+
+### Results HTML XML tag
+```js
+<tagName src="image.png" data="123" class="classe" onclick="func(event)"></tagName>
+```
+
+# Comparação com React
 #### React
 ```js
 function Welcome(props) {
