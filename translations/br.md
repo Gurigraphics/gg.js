@@ -1,7 +1,7 @@
 # GG.js
 Interfaces muito mais complexas | Desenvolvimento muito mais simples
 
-![GitHub Logo](https://imgur.com/w1t6BeL.png)
+![GitHub Logo](https://imgur.com/izjGIx2.png)  
 
 # Introdução
   
@@ -39,6 +39,7 @@ const gg = function(obj){
 //The emptyElements = <input/>, <img/>, etc.
 ```
 
+# Utilização
 
 ### Comparação com React
 #### React
@@ -81,9 +82,13 @@ DIV.app = () => {
 document.getElementById('#root').innerHTML = DIV.app()
 ```
 GG.js é puro Javascript. 
-Sem babel. Sem webpack. Sem NPM. Sem vulnerabilidades. Sem código não utilizado.
+
+Sem babel. Sem webpack. Sem NPM. Sem vulnerabilidades.
+
+Sem código não utilizado.
 Sem ter que consultar documentação para saber como utilizar.
 
+# Contexto
 
 ### Contextualização
 
