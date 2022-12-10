@@ -22,7 +22,8 @@ const gg = function(a){var d="area base br col embed hr img input keygen link me
 ### Versão não minificada
 ```js
 const gg = function(obj){
-  const emptyElements = ['area','base','br','col','embed','hr','img','input','keygen','link','meta','param','source','track','wbr']   
+  const emptyElements = ['area','base','br','col','embed','hr','img',
+  'input','keygen','link','meta','param','source','track','wbr']   
   const mount = (obj) => {  
     obj.style ? obj.style = obj.style.split('\n').join(' ') : 0 
     !obj.tag ? obj.tag = 'div' : 0    
@@ -39,9 +40,66 @@ const gg = function(obj){
 //The emptyElements = <input/>, <img/>, etc.
 ```
 
+### Versão comentada
+```js
+/**
+ * Cria uma representação em formato de string de um elemento HTML.
+ *
+ * @param {Object} obj - O objeto que contém as propriedades do elemento HTML.
+ * @returns {string} A representação em formato de string do elemento HTML.
+ */
+const gg = function(obj) {
+  // Define uma lista de elementos HTML vazios.
+  const emptyElements = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 
+  'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr'];
+
+  // Cria a representação em formato de string do elemento HTML.
+  const mount = (obj) => {
+    // Remove quaisquer quebras de linha da string da propriedade "style".
+    if (obj.style) {
+      obj.style = obj.style.split('\n').join(' ');
+    }
+
+    // Define a tag padrão para o elemento HTML.
+    if (!obj.tag) {
+      obj.tag = 'div';
+    }
+
+    // Cria a string que representa o elemento HTML.
+    let element = `<${obj.tag}`;
+
+    // Percorre as propriedades do objeto e adiciona os atributos ao elemento HTML.
+    for (let property in obj) {
+      if (property !== 'tag' && property !== 'html') {
+        element += ` ${property}='${obj[property]}'`;
+      }
+    }
+
+    // Verifica se a tag é um elemento HTML vazio.
+    if (emptyElements.includes(obj.tag)) {
+      return `${element}/>`;
+    } else if (obj.html) {
+      // Adiciona o conteúdo do elemento HTML.
+      element += `>${obj.html}`;
+    } else {
+      element += '>';
+    }
+
+    // Fecha a tag do elemento HTML.
+    return `${element}</${obj.tag}>`;
+  };
+
+  // Retorna a representação em formato de string do elemento HTML.
+  if (obj) {
+    return mount(obj);
+  }
+};
+```
 # Utilização
 
 ### GG object tag
+
+Para usar esta função, basta chamá-la passando um objeto que contenha as propriedades do elemento HTML que você quer criar. Por exemplo:
 ```js
 var div = gg({
  tag: "tagName",
@@ -53,9 +111,20 @@ var div = gg({
 ```
 
 ### Results HTML XML tag
+Isso retornará a representação em formato de string do elemento HTML
 ```js
 <tagName src="image.png" data="123" class="classe" onclick="func(event)"></tagName>
 ```
+
+Que é muito menos repetitivo e burocrático que isso
+```js
+const newDiv = document.createElement("div");
+const newContent = document.createTextNode("Hi there and greetings!");
+newDiv.appendChild(newContent);
+newDiv.classList.add('my-class-name');
+newDiv.onclick="printWorking()";
+```
+
 
 # Comparação com React
 #### React
