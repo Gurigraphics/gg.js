@@ -38,11 +38,67 @@ const gg = function(obj){
 //The elements = <div></div>, <span></span>, etc.
 //The emptyElements = <input/>, <img/>, etc.
 ```
+### Commented version
 
+```js
+/**
+ * Creates a string representation of an HTML element.
+ *
+ * @param {Object} obj - The object containing the properties of the HTML element.
+ * @returns {string} The string representation of the HTML element.
+ */
+const gg = function(obj) {
+  // Define a list of empty HTML elements.
+  const emptyElements = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 
+  'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr'];
+
+  // Creates the string representation of the HTML element.
+  const mount = (obj) => {
+    // Removes any line breaks from the "style" property string.
+    if (obj.style) {
+      obj.style = obj.style.split('\n').join(' ');
+    }
+
+    // Defines the default tag for the HTML element.
+    if (!obj.tag) {
+      obj.tag = 'div';
+    }
+
+    // Creates the string representing the HTML element.
+    let element = `<${obj.tag}`;
+
+    // Loops through the object's properties and adds attributes to the HTML element.
+    for (let property in obj) {
+      if (property !== 'tag' && property !== 'html') {
+        element += ` ${property}='${obj[property]}'`;
+      }
+    }
+
+    // Checks if the tag is an empty HTML element.
+    if (emptyElements.includes(obj.tag)) {
+      return `${element}/>`;
+    } else if (obj.html) {
+      // Adds the content of the HTML element.
+      element += `>${obj.html}`;
+    } else {
+      element += '>';
+    }
+
+    // Closes the HTML element's tag.
+    return `${element}</${obj.tag}>`;
+  };
+
+  // Returns the string representation of the HTML element.
+  if (obj) {
+    return mount(obj);
+  }
+};
+```
 
 # Usage
 
 ### GG object tag
+To use this function, just call it passing an object that contains the properties of the HTML element you want to create. For example:
 ```js
 var div = gg({
  tag: "tagName",
@@ -54,8 +110,18 @@ var div = gg({
 ```
 
 ### Results HTML XML tag
+This will return the string representation of the HTML element
 ```js
 <tagName src="image.png" data="123" class="classe" onclick="func(event)"></tagName>
+```
+
+Which is much less repetitive and bureaucratic than that
+```js
+const newDiv = document.createElement("div");
+const newContent = document.createTextNode("Hi there and greetings!");
+newDiv.appendChild(newContent);
+newDiv.classList.add('my-class-name');
+newDiv.onclick="printWorking()";
 ```
 
 # Comparison with React
